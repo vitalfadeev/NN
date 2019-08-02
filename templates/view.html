@@ -1,1 +1,70 @@
-view
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} view {% endblock %}
+{% block content %}
+
+
+<h4>Name: {{ batch.Project_Name }}</h4>
+<p>Received DateTime: {{ batch.Batch_Received_DateTime }}</p>
+<p>Description: {{ batch.Project_Description }}</p>
+<p>Status:</p>
+<p>Names of columns input:</p>
+<p>Names of columns output:</p>
+<p>Acuracy:</p>
+
+<a href=""#">Analyse of data</a><br>
+<br>
+
+<div class="d-none">
+    <p>file format, csv format</p>
+    <p>first line : title</p>
+    <p>Column Type</p>
+    <p>#columns, #lines</p>
+    <p>#lines to predict (lines with partial data)</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>c1</th>
+                <th>c2</th>
+                <th>c3</th>
+                <th>c4</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-6">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>c1</th>
+                <th>c2</th>
+                <th>c3</th>
+                <th>c4</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     path("my", core_views.my, name="my"),
     path("send", core_views.send, name="send"),
-    path("view", core_views.view, name="view"),
+    path('view/<int:batch_id>', view=core_views.view),
     path("public", core_views.public, name="public"),
     path("", core_views.home, name="home"),
 ]

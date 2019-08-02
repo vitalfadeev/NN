@@ -54,7 +54,11 @@ def send(request):
     return render(request, 'send.html', {'form': form})
 
 @login_required
-def view(request):
-    return render(request, 'view.html')
-
-
+def view(request, batch_id=None):
+    from batch.models import Batch
+    batch = Batch.objects.get(Batch_Id=batch_id)
+    template = loader.get_template('view.html')
+    context = {
+        'batch': batch,
+    }
+    return HttpResponse(template.render(context, request))
