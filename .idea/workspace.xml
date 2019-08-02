@@ -2,45 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0aabe6f5-dffa-465a-bdbc-862a5824dec0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/nn.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/nn.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/batch/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/batch/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/.idea/nn.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/batch/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/batch/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/batch/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/batch/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/batch/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/batch/migrations/0002_auto_20190802_0649.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/batch/migrations/0003_auto_20190802_0925.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/batch/migrations/0004_auto_20190802_0948.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/batch/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/batch/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/batch/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/batch/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/core/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/core/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/core/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/core/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/core/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/static/css/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/static/img/circle-512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/templates/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/templates/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/templates/my.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/templates/public.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/templates/send.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/templates/view.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/uploads/INSTALL.Windows.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/uploads/INSTALL.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nn/uploads/INSTALL_GXlztSy.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,8 +21,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="210">
+              <caret line="14" column="43" lean-forward="true" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -71,11 +36,20 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="134">
+              <caret line="53" column="72" selection-start-line="53" selection-start-column="72" selection-end-line="53" selection-end-column="72" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2145">
-              <caret line="143" column="14" selection-start-line="143" selection-start-column="14" selection-end-line="143" selection-end-column="14" />
+            <state relative-caret-position="441">
+              <caret line="147" lean-forward="true" selection-start-line="147" selection-end-line="147" />
             </state>
           </provider>
         </entry>
@@ -89,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/batch/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="79" selection-start-line="30" selection-start-column="79" selection-end-line="30" selection-end-column="79" />
+            <state relative-caret-position="441">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
             </state>
           </provider>
         </entry>
@@ -123,6 +97,7 @@
       <find>SITE_ROOT</find>
       <find>debuf</find>
       <find>LOGIN_URL</find>
+      <find>ALLOWED_HOSTS</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -138,16 +113,16 @@
         <option value="$PROJECT_DIR$/core/urls.py" />
         <option value="$PROJECT_DIR$/templates/view.html" />
         <option value="$PROJECT_DIR$/templates/public.html" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/static/css/index.css" />
         <option value="$PROJECT_DIR$/templates/my.html" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/templates/send.html" />
         <option value="$PROJECT_DIR$/batch/admin.py" />
-        <option value="$PROJECT_DIR$/core/settings.py" />
         <option value="$PROJECT_DIR$/batch/forms.py" />
         <option value="$PROJECT_DIR$/core/views.py" />
         <option value="$PROJECT_DIR$/batch/models.py" />
+        <option value="$PROJECT_DIR$/core/settings.py" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
       </list>
     </option>
   </component>
@@ -159,7 +134,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -167,17 +142,12 @@
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
-              <item name="nn" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/src/NMT/nn" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="NN" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/src/NMT/NN" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
             <path>
-              <item name="nn" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/src/NMT/nn" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="batch" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="nn" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/src/NMT/nn" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="NN" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/src/NMT/NN" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
@@ -201,6 +171,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -232,7 +203,28 @@
       <option name="project" value="LOCAL" />
       <updated>1564741264106</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="* initial">
+      <created>1564742301124</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1564742301124</updated>
+    </task>
+    <task id="LOCAL-00003" summary="* excludes">
+      <created>1564742449897</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1564742449898</updated>
+    </task>
+    <task id="LOCAL-00004" summary="* ALLOWED_HOSTS">
+      <created>1564742629426</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1564742629426</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -249,7 +241,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32840723" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
@@ -258,9 +250,37 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="* initial" />
-    <option name="LAST_COMMIT_MESSAGE" value="* initial" />
+    <MESSAGE value="* excludes" />
+    <MESSAGE value="* ALLOWED_HOSTS" />
+    <option name="LAST_COMMIT_MESSAGE" value="* ALLOWED_HOSTS" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/templates/public.html">
@@ -287,13 +307,6 @@
     <entry file="file://$PROJECT_DIR$/batch/views.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="379">
@@ -301,24 +314,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="4" selection-start-column="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="36" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -331,8 +330,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="210">
+          <caret line="14" column="43" lean-forward="true" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/my.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/batch/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/batch/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="147" lean-forward="true" selection-start-line="147" selection-end-line="147" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>
@@ -343,27 +380,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/settings.py">
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2145">
-          <caret line="143" column="14" selection-start-line="143" selection-start-column="14" selection-end-line="143" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/my.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/batch/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/batch/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="79" selection-start-line="30" selection-start-column="79" selection-end-line="30" selection-end-column="79" />
+        <state relative-caret-position="134">
+          <caret line="53" column="72" selection-start-line="53" selection-start-column="72" selection-end-line="53" selection-end-column="72" />
         </state>
       </provider>
     </entry>
