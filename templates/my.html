@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load account %}
+{% load socialaccount %}
+{% block title %} Sign in {% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8"></div>
+
+    <div class="col-md-4 text-right">
+        <a href="{% url 'send' %}" class="btn btn-outline-primary ix-row">Send new job</a>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Received DateTime</th>
+        <th>Description</th>
+        <th>Status (waiting, done)</th>
+        <th>Names of columns input</th>
+        <th>Names of columns output</th>
+        <th>Acuracy</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in query_results %}
+    <tr>
+        <td>{{ item.Project_Name }}</td>
+        <td>{{ item.Batch_Received_DateTime }}</td>
+        <td>{{ item.Project_Description }}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Solving_Acuracy</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

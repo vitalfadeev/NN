@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load account %}
+{% load socialaccount %}
+{% block title %} Sign in {% endblock %}
+{% block content %}
+
+
+<style>
+h4 {
+    margin: 25px 0;
+}
+</style>
+
+<div class="row ix-title">
+    <div class="col-md-12 mx-auto social-container text-center">
+        <div>
+
+            <h4>Want to evaluate machine learning ?</h4>
+            <h4>Want to do a machine learning project without programming ?</h4>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row align-items-center ix-content">
+    <div class="col-md-4 text-right">
+        <h5>How it works >></h5>
+    </div>
+    <div class="col-md-8">
+        <ol>
+            <li>You <b>send your data sheet</b> to ixioo and leave blank some area</li>
+            <li><b>Ixioo</b> analyze data, buld a model and then predict values </li>
+            <li>You <b>receive data</b> sheet with predicted values</li>
+        </ol>
+    </div>
+</div>
+
+
+{% if user.is_authenticated %}
+{% else %}
+<div class="row ix-actions">
+
+    <div class="col-md-4 text-right">
+        <!-- offset -->
+    </div>
+
+    <div class="col-md-8">
+
+        <a href="{% provider_login_url "google" %}">
+            <button class="btn btn-danger  mb-2">
+                Login with Google
+            </button>
+        </a>
+
+        <a href="{% provider_login_url "facebook" %}">
+            <button class="btn btn-primary mb-2">Login with Facebook</button>
+        </a>
+
+    </div>
+
+</div>
+{% endif %}
+
+{% endblock %}
