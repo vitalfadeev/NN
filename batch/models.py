@@ -10,7 +10,7 @@ class Batch(models.Model):
     User_ID                                 = models.ForeignKey(User, on_delete=models.CASCADE)
     Project_Name                            = models.CharField(max_length=255, null=True)
     Project_Description                     = models.TextField(null=True)
-    Project_IsPublic                        = models.BooleanField(null=True)
+    Project_IsPublic                        = models.BooleanField(default=False)
     Project_FileSourcePathName              = models.FileField(upload_to='uploads', default=True)
 
     AnalysisSource_ColumnsNameInput         = models.TextField(null=True)
@@ -28,6 +28,6 @@ class Batch(models.Model):
     Solving_DateTimeSending                 = models.DateTimeField(auto_now=True, null=True)
     Solving_CSVSolvedMergedFilePath         = models.CharField(max_length=255, null=True)
     Solving_DelayElapsed                    = models.IntegerField(null=True)
-    Solving_Acuracy                         = models.BooleanField(null=True)
+    Solving_Acuracy                         = models.BooleanField(default=False)
     Solving_TextError                       = models.TextField(null=True)
     Solving_TextWarning                     = models.TextField(null=True)
