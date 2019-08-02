@@ -33,13 +33,13 @@
               <div class="">
                   {% if user.is_authenticated %}
                   {% else %}
-                      <a href="#" class="btn btn-secondary">
+                      <button type="button"  class="btn btn-secondary" data-toggle="modal" data-target="#login-modal">
                           Signin
-                      </a>
+                      </button>
 
-                      <a href="#" class="btn btn-secondary">
+                      <button type="button"  class="btn btn-secondary" data-toggle="modal" data-target="#login-modal">
                           Register
-                      </a>
+                      </button>
                   {% endif %}
 
                   {% if user.is_authenticated %}
@@ -67,6 +67,58 @@
         {% endblock %}
     </div>
 
+
+   {% if user.is_authenticated %}
+   {% else %}
+    <!-- Modal -->
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+              <div  class="text-center">
+                <h5 class="modal-title" id="exampleModalLabel">Sign up or log in with one of your existing accounts</h5>
+              </div>
+              <br>
+
+              <div class="text-center">
+                  <form>
+
+                      <div class="form-group">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      </div>
+
+                      <div class="form-group">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      </div>
+
+                      <button type="submit" class="btn btn-secondary">Sing in</button>
+                  </form>
+              </div>
+              <br>
+
+              <div class="text-center">
+                <a href="{% provider_login_url "google" %}">
+                    <button class="btn btn-outline-dark mb-2">
+                        Login with Google
+                    </button>
+                </a>
+              </div>
+
+              <div class="text-center">
+                <a href="{% provider_login_url "facebook" %}">
+                    <button class="btn btn-outline-dark mb-2">
+                        Login with Facebook
+                    </button>
+                </a>
+              </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -83,5 +135,14 @@
             }
         });
     </script>
+
+  {% if user.is_authenticated %}
+  {% else %}
+    <script>
+        $('#login-modal').on('shown.bs.modal', function () {
+          $('#myInput').trigger('focus')
+        })
+    </script>
+  {% endif %}
 </body>
 </html>
