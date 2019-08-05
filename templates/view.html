@@ -5,18 +5,25 @@
 
 
 <h4>Name: {{ batch.Project_Name }}</h4>
-<p>Received DateTime: {{ batch.Batch_Received_DateTime }}</p>
-<p>Description: {{ batch.Project_Description }}</p>
-<p>Status:</p>
-<p>Names of columns input:</p>
-<p>Names of columns output:</p>
-<p>Acuracy:</p>
-
-<a href=""#">Analyse of data</a><br>
-<br>
+<div class="row">
+    <div class="col-md-2">Received DateTime:</div>
+    <div> {{ batch.Batch_Received_DateTime|date:'Y-m-d H:i' }}</div>
+</div>
+<div class="row">
+    <div class="col-md-2">Description:</div>
+    <div> {{ batch.Project_Description }}</div>
+</div>
+<div class="row">
+    <div class="col-md-2">Status:</div>
+    <div></div>
+</div>
+<div class="row">
+    <div class="col-md-2">Version:</div>
+    <div></div>
+</div>
 
 <!-- View first 5 lines and last 5 lines of csv -->
-<table class="table table-hover table-sm">
+<table class="table table-hover table-sm ">
     <thead>
     <tr>
     {% for name in csv_title %}
