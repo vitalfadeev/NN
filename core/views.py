@@ -4,6 +4,12 @@ from django.http import HttpResponse
 from django.template import loader
 
 
+# signup: allauth.account.forms.SignupForm
+# signup: allauth.socialaccount.forms.SignupForm
+# add_email: allauth.account.forms.AddEmailForm
+# change_password: allauth.account.forms.ChangePasswordForm
+# reset_password: allauth.account.forms.ResetPasswordForm
+
 # Create your views here.
 def home(request):
     return render(request, 'home.html')

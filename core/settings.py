@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'crispy_forms',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -142,6 +143,24 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 
 LOGIN_URL = "/"
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/my"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS=7
+#ACCOUNT_EMAIL_REQUIRED = True
+#ACCOUNT_USERNAME_REQUIRED = True
+#ACCOUNT_SIGNUP_FORM_CLASS = 'batch.forms.SignupForm'
+
+#
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'youremail@gmail.com'
+EMAIL_HOST_PASSWORD = 'yourpassword'
+EMAIL_PORT = 587
+
+from  .local_setting import EMAIL_HOST_USER, EMAIL_HOST_PASSWORD

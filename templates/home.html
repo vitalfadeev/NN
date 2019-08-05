@@ -42,20 +42,14 @@ h4 {
 {% else %}
 <div class="row ix-actions">
 
-    <div class="col-md-4 text-right">
-        <!-- offset -->
-    </div>
+    <div class="col-md-12 text-center">
 
-    <div class="col-md-8">
-
-        <a href="{% provider_login_url "google" %}">
-            <button class="btn btn-danger  mb-2">
-                Login with Google
-            </button>
+        <a href="#" class="btn btn-secondary col-md-2 mb-2 mr-2" data-toggle="modal" data-target="#login-modal">
+            Login
         </a>
 
-        <a href="{% provider_login_url "facebook" %}">
-            <button class="btn btn-primary mb-2">Login with Facebook</button>
+        <a href="{% url 'signup' %}" class="btn btn-secondary col-md-2 mb-2">
+            Registration
         </a>
 
     </div>
