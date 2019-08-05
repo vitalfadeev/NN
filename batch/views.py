@@ -65,7 +65,7 @@ def send(request):
                 batch.Project_FileSourcePathName = file_csv
                 batch.save()
 
-            return HttpResponseRedirect('/my')
+            return HttpResponseRedirect('/view/' + str(batch.Batch_Id))
 
     # if a GET (or any other method) we'll create a blank form
     else:
