@@ -1,1 +1,39 @@
-public
+{% extends 'base.html' %}
+{% load static %}
+{% load account %}
+{% load socialaccount %}
+{% block title %} my {% endblock %}
+{% block content %}
+
+<h1>Public data</h1>
+
+<table class="table table-hover" id="my-data">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Received DateTime</th>
+        <th>Description</th>
+        <th>Status (waiting, done)</th>
+        <th>Names of columns input</th>
+        <th>Names of columns output</th>
+        <th>Acuracy</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in public_batches %}
+    <tr class="cursor-pointer">
+        <td>{{ item.Batch_Id }}</td>
+        <td>{{ item.Project_Name }}</td>
+        <td>{{ item.Batch_Received_DateTime }}</td>
+        <td>{{ item.Project_Description }}</td>
+        <td>-</td>
+        <td>{{ item.AnalysisSource_ColumnsNameInput }}</td>
+        <td>{{ item.AnalysisSource_ColumnsNameOutput }}</td>
+        <td>{{ item.Solving_Acuracy }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

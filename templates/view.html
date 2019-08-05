@@ -15,6 +15,46 @@
 <a href=""#">Analyse of data</a><br>
 <br>
 
+<!-- View first 5 lines and last 5 lines of csv -->
+<table class="table table-hover table-sm" id="my-data">
+    <thead>
+    <tr>
+    {% for name in csv_title %}
+        <th>{{ name }}</th>
+    {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in csv_first %}
+    <tr class="cursor-pointer">
+        {% for dada in row %}
+            <td>{{ dada }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+    {% if csv_last %}
+    <tr class="cursor-pointer">
+        {% for dada in csv_title %}
+            <td>...</td>
+        {% endfor %}
+    </tr>
+
+    {% for row in csv_last %}
+    <tr class="cursor-pointer">
+        {% for dada in row %}
+            <td>{{ dada }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+    {% endif %}
+    </tbody>
+</table>
+<br>
+<br>
+
+<!-- Display table with information of analyse -->
 <div class="d-none">
     <p>file format, csv format</p>
     <p>first line : title</p>

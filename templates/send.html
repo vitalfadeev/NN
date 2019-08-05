@@ -1,23 +1,55 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load account %}
 {% load socialaccount %}
-{% load crispy_forms_tags %}
+{% load widget_tweaks %}
 {% block title %} Sign in {% endblock %}
+
 {% block content %}
+<div class="row">
+      <div class="col-md-3">
+          <!-- offset -->
+      </div>
 
-{{ form.non_field_errors }}
-{% for field in form %}
-    {{ field.id_for_label }}
-    {{ field.errors }}
-{% endfor %}
+      <div class="col-md-6">
+            <h1>Send data</h1>
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    {% csrf_token %}
 
-<form method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <input type="submit" value="Send" class="btn btn-success">
-    </div>
-</form>
+                    <div class="form-group">
+                      {{ form.Project_Name|add_class:"form-control" }}
+                      {% for error in form.Project_Name.errors %}
+                        <p style="color: red">{{ error }}</p>
+                      {% endfor %}
+                    </div>
 
+                    <div class="form-group">
+                      {{ form.Project_FileSourcePathName|add_class:"form-control" }}
+                      {% for error in form.Project_FileSourcePathName.errors %}
+                        <p style="color: red">{{ error }}</p>
+                      {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                      {{ form.Project_Description|add_class:"form-control" }}
+                      {% for error in form.Project_Description.errors %}
+                        <p style="color: red">{{ error }}</p>
+                      {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            {{ form.Project_IsPublic|add_class:"form-check-input"|attr:"id:Project_IsPublic" }}
+                            <label class="form-check-label" for="Project_IsPublic">Is Public</label>
+                        </div>
+                        {% for error in form.Project_IsPublic.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <button type="submit" value="Send" class="btn btn-dark">Send</button>
+                </div>
+            </form>
+      </div>
+</div>
 {% endblock %}

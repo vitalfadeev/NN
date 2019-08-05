@@ -1,56 +1,102 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from .forms import SignupForm
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from .tokens import account_activation_token
-from django.contrib.auth.models import User
-from django.core.mail import EmailMessage
-from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.template import loader
+from django.conf import  settings
 
 
-def signup(request):
+# signup: allauth.account.forms.SignupForm
+# signup: allauth.socialaccount.forms.SignupForm
+# add_email: allauth.account.forms.AddEmailForm
+# change_password: allauth.account.forms.ChangePasswordForm
+# reset_password: allauth.account.forms.ResetPasswordForm
+
+# Create your views here.
+def home(request):
+    return render(request, 'home.html')
+
+
+@login_required
+def my(request):
+    from batch.models import Batch
+    query_results = Batch.objects.filter(User_ID=request.user)
+    template = loader.get_template('my.html')
+    context = {
+        'query_results': query_results,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+# no login
+def public(request):
+    from batch.models import Batch
+
+    public_batches = Batch.objects.filter(Project_IsPublic=True)
+
+    template = loader.get_template('public.html')
+
+    context = {
+        'public_batches': public_batches,
+    }
+
+    return HttpResponse(template.render(context, request))
+
+
+@login_required
+def send(request):
+    from django.http import HttpResponseRedirect
+    from .forms import SendForm
+    from .helpers import handle_uploaded_file
+
+    # if this is a POST request we need to process the form data
     if request.method == 'POST':
-        form = SignupForm(request.POST)
+        form = SendForm(request.POST, request.FILES)
+
         if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user.save()
-            current_site = get_current_site(request)
-            mail_subject = 'Activate your blog account.'
-            message = render_to_string('acc_active_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                'token':account_activation_token.make_token(user),
-            })
-            to_email = form.cleaned_data.get('email')
-            email = EmailMessage(
-                        mail_subject, message, to=[to_email]
-            )
-            email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
+            local_file_name = form.cleaned_data['Project_FileSourcePathName']
+            (analyse_result, local_file_name) = handle_uploaded_file(local_file_name, request.user)
+
+            if analyse_result:
+                batch = form.save(commit=False)
+                batch.User_ID = request.user
+                batch.save()
+                return HttpResponseRedirect('/my')
+
+            else:
+                pass # eerors when analyse
+
+    # if a GET (or any other method) we'll create a blank form
     else:
-        form = SignupForm()
-    return render(request, 'signup.html', {'form': form})
+        form = SendForm()
+
+    return render(request, 'send.html', {'form': form})
 
 
-def activate(request, uidb64, token):
-    try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-    if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        user.save()
-        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-        # return redirect('home')
-        #return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
-        return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
+@login_required
+def view(request, batch_id=None):
+    from .models import Batch
+    from .helpers import get_csv_lines
+    from django.conf import settings
+    import os
+
+    FIRST_LINES = 5
+    LAST_LINES = 5
+
+    batch = Batch.objects.get(Batch_Id=batch_id)
+
+    if os.path.isfile(batch.Project_FileSourcePathName.path):
+        file_name = batch.Project_FileSourcePathName.path
+        (csv_title, csv_first, csv_last) = get_csv_lines(file_name, 1 + FIRST_LINES, LAST_LINES)
+        csv_last.reverse()
     else:
-        return HttpResponse('Activation link is invalid!')
+        (csv_title, csv_first, csv_last) = ([], [], [])
+
+    template = loader.get_template('view.html')
+
+    context = {
+        'batch': batch,
+        'csv_title': csv_title,
+        'csv_first': csv_first,
+        'csv_last' : csv_last,
+    }
+    return HttpResponse(template.render(context, request))

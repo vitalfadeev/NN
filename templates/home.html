@@ -12,7 +12,7 @@ h4 {
 }
 </style>
 
-<div class="row ix-title">
+<div class="row">
     <div class="col-md-12 mx-auto social-container text-center">
         <div>
 
@@ -24,7 +24,7 @@ h4 {
 </div>
 
 
-<div class="row align-items-center ix-content">
+<div class="row align-items-center">
     <div class="col-md-4 text-right">
         <h5>How it works >></h5>
     </div>
@@ -40,15 +40,15 @@ h4 {
 
 {% if user.is_authenticated %}
 {% else %}
-<div class="row ix-actions">
+<div class="row">
 
     <div class="col-md-12 text-center">
 
-        <a href="#" class="btn btn-secondary col-md-2 mb-2 mr-2" data-toggle="modal" data-target="#login-modal">
+        <a href="{% url 'account_login' %}" class="btn btn-secondary col-md-2 mb-2 mr-2">
             Login
         </a>
 
-        <a href="{% url 'signup' %}" class="btn btn-secondary col-md-2 mb-2">
+        <a href="{% url 'account_signup' %}" class="btn btn-secondary col-md-2 mb-2">
             Registration
         </a>
 

@@ -1,0 +1,43 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load widget_tweaks %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<div class="row">
+      <div class="col-md-4">
+          <!-- offset -->
+      </div>
+
+      <div class="col-md-4 text-center">
+          <h2>{% trans "Sign Up" %}</h2>
+
+          <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+          <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+
+            <div class="form-group">
+              {{ form.email|add_class:"form-control"|attr:"autofocus" }}
+              {% for error in form.email.errors %}
+                <p style="color: red">{{ error }}</p>
+              {% endfor %}
+            </div>
+
+            <div class="form-group">
+              {{ form.password1|add_class:"form-control"|attr:"autofocus" }}
+              {% for error in form.password1.errors %}
+                <p style="color: red">{{ error }}</p>
+              {% endfor %}
+            </div>
+
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+
+            <button type="submit" class="btn btn-dark  mb-3">Sign Up</button>
+          </form>
+
+      </div>
+</div>
+{% endblock %}

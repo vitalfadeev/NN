@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .helpers import uploads_directory_path
+from .validators import validate_file_extension
+
 
 
 class Batch(models.Model):
@@ -11,7 +14,8 @@ class Batch(models.Model):
     Project_Name                            = models.CharField(max_length=255, null=True)
     Project_Description                     = models.TextField(null=True)
     Project_IsPublic                        = models.BooleanField(default=False)
-    Project_FileSourcePathName              = models.FileField(upload_to='uploads', default=True)
+    Project_FileSourcePathName              = models.FileField(upload_to=uploads_directory_path,
+                                                               validators=[validate_file_extension])
 
     AnalysisSource_ColumnsNameInput         = models.TextField(null=True)
     AnalysisSource_ColumnsNameOutput        = models.TextField(null=True)
