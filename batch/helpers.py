@@ -46,7 +46,10 @@ def convert_csv_to_csv(src, file_csv):
                 writer.writerow(row)
 
 
-def handle_uploaded_file(local_file_name):
+def handle_uploaded_file(local_file_name, batch):
+    import json
+    from .data_pre_analyser import analyse_source_data_find_input_output
+
     file_csv = ""
 
     # convert
@@ -63,13 +66,19 @@ def handle_uploaded_file(local_file_name):
         convert_csv_to_csv(local_file_name, file_csv)
 
     else:
-        analyse_result = False
-        return (analyse_result, file_csv)
+        return (False, "") # FAIL
 
     # Analyse with external analyser
-    # ... local_file_name ...
-    analyse_result = True
-    return (analyse_result, file_csv)
+    A = analyse_source_data_find_input_output(file_csv)
+    batch.AnalysisSource_ColumnsNameInput           = json.dumps(A.column_names_input)
+    batch.AnalysisSource_ColumnsNameOutput          = json.dumps(A.column_names_output)
+    batch.AnalysisSource_ColumnType                 = json.dumps(A.column_types)
+    batch.AnalysisSource_CountLinesForTraining      = json.dumps(A.lines_for_training_count)
+    batch.AnalysisSource_CountLinesForPrediction    = json.dumps(A.lines_to_predict_count)
+    batch.AnalysisSource_Errors                     = json.dumps(A.errors_info)
+    batch.AnalysisSource_Warnings                   = json.dumps(A.warning_info)
+
+    return (True, file_csv) # OK
 
 
 def get_csv_lines(file_name, first_lines, last_lines):

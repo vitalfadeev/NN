@@ -59,7 +59,7 @@ def send(request):
 
             # analyse
             uploaded = batch.Project_FileSourcePathName.path
-            (analyse_result, file_csv) = handle_uploaded_file(uploaded)
+            (analyse_result, file_csv) = handle_uploaded_file(uploaded, batch)
 
             if analyse_result:
                 batch.Project_FileSourcePathName = file_csv
@@ -80,6 +80,7 @@ def view(request, batch_id=None):
     from .helpers import get_csv_lines
     from django.conf import settings
     import os
+    import json
 
     FIRST_LINES = 5
     LAST_LINES = 5
@@ -93,6 +94,20 @@ def view(request, batch_id=None):
     else:
         (csv_title, csv_first, csv_last) = ([], [], [])
 
+    if batch.AnalysisSource_ColumnsNameInput:
+        analyser_cols_input = json.loads(batch.AnalysisSource_ColumnsNameInput)[:4]
+    else:
+        analyser_cols_input = []
+
+    if batch.AnalysisSource_ColumnType:
+        analyser_cols_type = []
+        types = json.loads(batch.AnalysisSource_ColumnType)
+        for cname in analyser_cols_input:
+            tp = types[cname]
+            analyser_cols_type.append( tp )
+    else:
+        analyser_cols_type = []
+
     template = loader.get_template('view.html')
 
     context = {
@@ -100,5 +115,10 @@ def view(request, batch_id=None):
         'csv_title': csv_title,
         'csv_first': csv_first,
         'csv_last' : csv_last,
+        'analyser_errors'       : batch.AnalysisSource_Errors,
+        'analyser_warnings'     : batch.AnalysisSource_Warnings,
+        'analyser_cols_input'   : analyser_cols_input,
+        'analyser_cols_output'  : json.loads(batch.AnalysisSource_ColumnsNameOutput)[:4],
+        'analyser_cols_type'    : analyser_cols_type,
     }
     return HttpResponse(template.render(context, request))

@@ -52,7 +52,6 @@
     </tbody>
 </table>
 <br>
-<br>
 
 <!-- Display table with information of analyse -->
 <div class="d-none">
@@ -63,44 +62,69 @@
     <p>#lines to predict (lines with partial data)</p>
 </div>
 
+<!-- Analyser errors -->
+{% if analyser_errors != "\"\"" %}
+<div class="row ">
+    <div class="col-md-6">
+        <div class="alert alert-danger">
+            {{ analyser_errors }}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if analyser_warnings != "\"\"" %}
 <div class="row">
     <div class="col-md-6">
-        <table class="table">
+        <div class="alert alert-warning">
+            {{ analyser_warnings }}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- -->
+<div class="row mt-4">
+    <div class="col-md-6">
+        <table class="table table-sm">
             <thead>
             <tr>
-                <th>c1</th>
-                <th>c2</th>
-                <th>c3</th>
-                <th>c4</th>
+                {% for col_name in analyser_cols_input %}
+                <th>{{ col_name }}</th>
+                {% endfor %}
             </tr>
             </thead>
             <tbody>
+            <!-- Type -->
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                {% for col_type in analyser_cols_type %}
+                <td>{{ col_type }}</td>
+                {% endfor %}
+            </tr>
+            <!-- Data -->
+            <tr>
+                {% for col_name in analyser_cols_input %}
+                <td>...</td>
+                {% endfor %}
             </tr>
             </tbody>
         </table>
     </div>
 
     <div class="col-md-6">
-        <table class="table">
+        <table class="table table-sm">
             <thead>
             <tr>
-                <th>c1</th>
-                <th>c2</th>
-                <th>c3</th>
-                <th>c4</th>
+                {% for col_name in analyser_cols_output %}
+                <th>{{ col_name }}</th>
+                {% endfor %}
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                {% for col_name in analyser_cols_output %}
+                <td>...</td>
+                {% endfor %}
             </tr>
             </tbody>
         </table>
