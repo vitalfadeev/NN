@@ -3,8 +3,12 @@
 {% load account %}
 {% load socialaccount %}
 {% block title %} my {% endblock %}
-{% block content %}
 
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/fh-3.1.4/r-2.2.2/datatables.min.css"/>
+{% endblock extracss %}
+
+{% block content %}
 <h1>Public data</h1>
 
 <table class="table table-hover" id="my-data">
@@ -25,7 +29,7 @@
     <tr class="cursor-pointer">
         <td>{{ item.Batch_Id }}</td>
         <td>{{ item.Project_Name }}</td>
-        <td>{{ item.Batch_Received_DateTime }}</td>
+        <td>{{ item.Batch_Received_DateTime|date:'Y-m-d H:i' }}</td>
         <td>{{ item.Project_Description }}</td>
         <td>-</td>
         <td>{{ item.AnalysisSource_ColumnsNameInput }}</td>
@@ -36,4 +40,25 @@
     </tbody>
 </table>
 
-{% endblock %}
+{% endblock content %}
+
+{% block extrajs %}
+<script type="text/javascript">
+    $("#my-data").on('click', function(e) {
+        if (e.target.tagName == 'TD') {
+            var tr = e.target.parentNode;
+            var td1 = $(tr).find('TD').first();
+            var batch_id = td1.text();
+            window.location.href = '/view/' + batch_id;
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/fh-3.1.4/r-2.2.2/datatables.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready( function () {
+    $('#my-data').DataTable();
+} );
+</script>
+{% endblock extrajs %}
