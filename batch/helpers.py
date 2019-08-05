@@ -22,7 +22,7 @@ def convert_xls_to_csv(file_xls, file_csv):
     for sheet_name in wb.sheet_names():
         sh = wb.sheet_by_name(sheet_name)
 
-        with open(file_csv, 'w') as dst:
+        with open(file_csv, 'w', encoding='utf-8') as dst:
             writer = csv.writer(dst, delimiter='\t')
 
             for rownum in range(sh.nrows):
@@ -34,12 +34,12 @@ def convert_xls_to_csv(file_xls, file_csv):
 def convert_csv_to_csv(src, file_csv):
     import csv
 
-    with open(src) as fin:
+    with open(src, encoding='utf-8') as fin:
         dialect = csv.Sniffer().sniff(fin.read(1024))
         fin.seek(0)
         reader = csv.reader(fin, dialect)
 
-        with open(file_csv, 'w') as dst:
+        with open(file_csv, 'w', encoding='utf-8') as dst:
             writer = csv.writer(dst, delimiter='\t')
 
             for row in reader:
