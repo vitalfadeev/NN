@@ -53,17 +53,19 @@ def send(request):
         form = SendForm(request.POST, request.FILES)
 
         if form.is_valid():
-            local_file_name = form.cleaned_data['Project_FileSourcePathName']
-            (analyse_result, local_file_name) = handle_uploaded_file(local_file_name, request.user)
+            batch = form.save(commit=False)
+            batch.User_ID = request.user
+            batch.save()
+
+            # analyse
+            uploaded = batch.Project_FileSourcePathName.path
+            (analyse_result, file_csv) = handle_uploaded_file(uploaded)
 
             if analyse_result:
-                batch = form.save(commit=False)
-                batch.User_ID = request.user
+                batch.Project_FileSourcePathName = file_csv
                 batch.save()
-                return HttpResponseRedirect('/my')
 
-            else:
-                pass # eerors when analyse
+            return HttpResponseRedirect('/my')
 
     # if a GET (or any other method) we'll create a blank form
     else:

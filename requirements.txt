@@ -2,3 +2,4 @@ django
 django-allauth
 django-crispy-forms
 django-widget-tweaks
+xlrd

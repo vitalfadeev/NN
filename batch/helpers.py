@@ -8,17 +8,68 @@ def uploads_directory_path(instance, filename):
     timestamp = int(time.time())
     cleaned_file_name = slugify(filename)
 
-    local_file_name = 'user_{0}/{1}-{2}.csv'.format(user_id, timestamp, cleaned_file_name)
+    local_file_name = 'user_{0}/{1}-{2}'.format(user_id, timestamp, cleaned_file_name)
 
     return local_file_name
 
 
-def handle_uploaded_file(local_file_name, user):
+def convert_xls_to_csv(file_xls, file_csv):
+    import xlrd
+    import csv
+
+    wb = xlrd.open_workbook(file_xls)
+
+    for sheet_name in wb.sheet_names():
+        sh = wb.sheet_by_name(sheet_name)
+
+        with open(file_csv, 'w') as dst:
+            writer = csv.writer(dst, delimiter='\t')
+
+            for rownum in range(sh.nrows):
+                writer.writerow(sh.row_values(rownum))
+
+        break # first worksheet only
+
+
+def convert_csv_to_csv(src, file_csv):
+    import csv
+
+    with open(src) as fin:
+        dialect = csv.Sniffer().sniff(fin.read(1024))
+        fin.seek(0)
+        reader = csv.reader(fin, dialect)
+
+        with open(file_csv, 'w') as dst:
+            writer = csv.writer(dst, delimiter='\t')
+
+            for row in reader:
+                writer.writerow(row)
+
+
+def handle_uploaded_file(local_file_name):
+    file_csv = ""
+
+    # convert
+    if local_file_name.endswith("xls"):
+        file_csv = local_file_name + ".csv"
+        convert_xls_to_csv(local_file_name, file_csv)
+
+    elif local_file_name.endswith("xlsx"):
+        file_csv = local_file_name + ".csv"
+        convert_xls_to_csv(local_file_name, file_csv)
+
+    elif local_file_name.endswith("csv"):
+        file_csv = local_file_name[:-3] + ".csv"
+        convert_csv_to_csv(local_file_name, file_csv)
+
+    else:
+        analyse_result = False
+        return (analyse_result, file_csv)
+
     # Analyse with external analyser
     # ... local_file_name ...
     analyse_result = True
-
-    return (analyse_result, local_file_name)
+    return (analyse_result, file_csv)
 
 
 def get_csv_lines(file_name, first_lines, last_lines):
@@ -27,13 +78,13 @@ def get_csv_lines(file_name, first_lines, last_lines):
     last  = []
 
     import csv
-    with open(file_name, newline='', encoding='utf-8') as csvfile:
-        reader = csv.reader(csvfile, dialect='excel')
+    with open(file_name, encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile, delimiter='\t')
         for row in reader:
             title = row
             break # one only
 
-        reader = csv.reader(csvfile, dialect='excel')
+        reader = csv.reader(csvfile, delimiter='\t')
 
         # head
         for i, row in enumerate(reader):
@@ -57,7 +108,7 @@ def get_csv_lines(file_name, first_lines, last_lines):
         else:
             # big file. Need read tail
             last = []
-            tail_reader = csv.reader(FileTail(file_name))
+            tail_reader = csv.reader(FileTail(file_name), delimiter='\t')
 
             for i, row in enumerate(tail_reader):
                 if i < last_lines:
