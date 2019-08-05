@@ -5,7 +5,7 @@
 
 
 <h4>Name: {{ batch.Project_Name }}</h4>
-<div class="row">
+<div class="row mb">
     <div class="col-md-2">Received DateTime:</div>
     <div> {{ batch.Batch_Received_DateTime|date:'Y-m-d H:i' }}</div>
 </div>
@@ -17,7 +17,7 @@
     <div class="col-md-2">Status:</div>
     <div></div>
 </div>
-<div class="row">
+<div class="row mb-1">
     <div class="col-md-2">Version:</div>
     <div></div>
 </div>
@@ -114,7 +114,6 @@
 </div>
 
 <!-- Right table -->
-{% endblock %}
 
 
 <!-- Raw -->
@@ -166,3 +165,4 @@
 
 <br>
 
+{% endblock %}
