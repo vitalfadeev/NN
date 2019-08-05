@@ -27,7 +27,7 @@ def get_csv_lines(file_name, first_lines, last_lines):
     last  = []
 
     import csv
-    with open(file_name, newline='') as csvfile:
+    with open(file_name, newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile, dialect='excel')
         for row in reader:
             title = row
