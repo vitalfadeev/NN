@@ -87,6 +87,7 @@ def view(request, batch_id=None):
 
     batch = Batch.objects.get(Batch_Id=batch_id)
 
+    #
     if os.path.isfile(batch.Project_FileSourcePathName.path):
         file_name = batch.Project_FileSourcePathName.path
         (csv_title, csv_first, csv_last) = get_csv_lines(file_name, 1 + FIRST_LINES, LAST_LINES)
@@ -94,19 +95,61 @@ def view(request, batch_id=None):
     else:
         (csv_title, csv_first, csv_last) = ([], [], [])
 
+    #
     if batch.AnalysisSource_ColumnsNameInput:
-        analyser_cols_input = json.loads(batch.AnalysisSource_ColumnsNameInput)[:4]
+        analyser_cols_input = json.loads(batch.AnalysisSource_ColumnsNameInput)
     else:
         analyser_cols_input = []
 
+    #
+    if batch.AnalysisSource_ColumnsNameOutput:
+        analyser_cols_output = json.loads(batch.AnalysisSource_ColumnsNameOutput)
+    else:
+        analyser_cols_output = []
+
+    #
     if batch.AnalysisSource_ColumnType:
-        analyser_cols_type = []
+        analyser_cols_type_in = []
         types = json.loads(batch.AnalysisSource_ColumnType)
         for cname in analyser_cols_input:
             tp = types[cname]
-            analyser_cols_type.append( tp )
+            analyser_cols_type_in.append( tp )
     else:
-        analyser_cols_type = []
+        analyser_cols_type_in = []
+
+    #
+    if batch.AnalysisSource_ColumnType:
+        analyser_cols_type_out = []
+        types = json.loads(batch.AnalysisSource_ColumnType)
+        for cname in analyser_cols_output:
+            tp = types[cname]
+            analyser_cols_type_out.append( tp )
+    else:
+        analyser_cols_type_out = []
+
+    #
+    analyser_first_5 = []
+    for row in csv_first:
+        newrow = []
+        for title in analyser_cols_input:
+            i = csv_title.index(title)
+            newrow.append(row[i])
+        for title in analyser_cols_output:
+            i = csv_title.index(title)
+            newrow.append(row[i])
+        analyser_first_5.append(newrow)
+
+    #
+    analyser_last_5 = []
+    for row in csv_last:
+        newrow = []
+        for title in analyser_cols_input:
+            i = csv_title.index(title)
+            newrow.append(row[i])
+        for title in analyser_cols_output:
+            i = csv_title.index(title)
+            newrow.append(row[i])
+        analyser_last_5.append(newrow)
 
     template = loader.get_template('view.html')
 
@@ -118,7 +161,10 @@ def view(request, batch_id=None):
         'analyser_errors'       : batch.AnalysisSource_Errors,
         'analyser_warnings'     : batch.AnalysisSource_Warnings,
         'analyser_cols_input'   : analyser_cols_input,
-        'analyser_cols_output'  : json.loads(batch.AnalysisSource_ColumnsNameOutput)[:4],
-        'analyser_cols_type'    : analyser_cols_type,
+        'analyser_cols_output'  : analyser_cols_output,
+        'analyser_cols_type_in' : analyser_cols_type_in,
+        'analyser_cols_type_out': analyser_cols_type_out,
+        'analyser_first_5'      : analyser_first_5,
+        'analyser_last_5'       : analyser_last_5,
     }
     return HttpResponse(template.render(context, request))
