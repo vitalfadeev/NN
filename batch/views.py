@@ -90,7 +90,7 @@ def view(request, batch_id=None):
     #
     if os.path.isfile(batch.Project_FileSourcePathName.path):
         file_name = batch.Project_FileSourcePathName.path
-        (csv_title, csv_first, csv_last) = get_csv_lines(file_name, 1 + FIRST_LINES, LAST_LINES)
+        (csv_title, csv_first, csv_last) = get_csv_lines(file_name, FIRST_LINES, LAST_LINES)
         csv_last.reverse()
     else:
         (csv_title, csv_first, csv_last) = ([], [], [])
@@ -112,7 +112,7 @@ def view(request, batch_id=None):
         analyser_cols_type_in = []
         types = json.loads(batch.AnalysisSource_ColumnType)
         for cname in analyser_cols_input:
-            tp = types[cname]
+            tp = types.get(cname, None)
             analyser_cols_type_in.append( tp )
     else:
         analyser_cols_type_in = []
@@ -158,8 +158,8 @@ def view(request, batch_id=None):
         'csv_title': csv_title,
         'csv_first': csv_first,
         'csv_last' : csv_last,
-        'analyser_errors'       : batch.AnalysisSource_Errors,
-        'analyser_warnings'     : batch.AnalysisSource_Warnings,
+        'analyser_errors'       : json.loads(batch.AnalysisSource_Errors),
+        'analyser_warnings'     : json.loads(batch.AnalysisSource_Warnings),
         'analyser_cols_input'   : analyser_cols_input,
         'analyser_cols_output'  : analyser_cols_output,
         'analyser_cols_type_in' : analyser_cols_type_in,

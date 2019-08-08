@@ -22,16 +22,22 @@ class AnalyzedObject:
         self.lines_for_training_count          = 0
         self.lines_to_predict_count            = 0
         self.lines_to_skip_count               = 0
-        self.errors_info                       = ''    # DICT[ Columnname = "error mesg" ) ================================================================================
-        self.warning_info                      = ''
+        self.errors_info                       = {}
+        self.warning_info                      = {}
         self.lines_to_predict_indexes_list     = []
         self.lines_to_skip_indexes_list        = []
 
-    def add_error_info_for_column(self, error_message):
-        self.errors_info += error_message
+    def add_error_info_for_column(self, column, error_message):
+        if column not in self.errors_info:
+            self.errors_info[column] = error_message
+        else:
+            self.errors_info[column] += error_message
 
-    def add_warning_info_for_column(self,warning_message):
-        self.warning_info += warning_message
+    def add_warning_info_for_column(self, column, warning_message):
+        if column not in self.warning_info:
+            self.warning_info[column] = warning_message
+        else:
+            self.warning_info[column] += warning_message
 
 
 # Check count of missing values. In output columns should be the same number of missing values
@@ -47,8 +53,8 @@ def check_missing_data_count(analyzer_object, columns_with_missing_data_dict):
         max_num = max(columns_with_missing_data_dict.values())
         for column in columns_with_missing_data_dict:
             if columns_with_missing_data_dict[column] < max_num:
-                analyzer_object.add_warning_info_for_column("%s: In this column are less values than in another "
-                                                            "output columns\n" % column)
+                analyzer_object.add_warning_info_for_column(column, "In this column are less values than in another "
+                                                                    "output columns\n")
 
         return list(columns_with_missing_data_dict.keys())
 
@@ -76,14 +82,14 @@ def check_tags(analyzer_object, column_from_dataset):
         if count_dots_comma == len(column_from_dataset):
             return 'TAGS_DOTCOMMA'
         else:
-            analyzer_object.add_warning_info_for_column('%s: In column are different split style\n' % column_from_dataset.name)
+            analyzer_object.add_warning_info_for_column(column_from_dataset.name, 'In column are different split style\n')
             return 'TAGS_DOTCOMMA'
 
     elif count_commas > count_dots_comma:
         if count_commas == len(column_from_dataset):
             return 'TAGS_COMMA'
         else:
-            analyzer_object.add_warning_info_for_column('%s: In column are different split style\n' %column_from_dataset.name)
+            analyzer_object.add_warning_info_for_column(column_from_dataset.name, 'In column are different split style\n')
             return 'TAGS_COMMA'
 
 
@@ -100,14 +106,14 @@ def check_type_for_column_with_mixed_data(analyzer_object, column_from_dataset):
         if len(count_string) == len(column_from_dataset):
             return 'TAGS'
         else:
-            analyzer_object.add_warning_info_for_column('%s: This column is string but have some '
-                                                        'numeric data\n' % column_from_dataset.name)
+            analyzer_object.add_warning_info_for_column(column_from_dataset.name, 'This column is string but have some '
+                                                                                  'numeric data\n')
             analyzer_object.lines_to_skip_indexes_list += count_numbers
             return 'TAGS'
 
     elif len(count_string) < len(count_numbers):
-        analyzer_object.add_warning_info_for_column('%s: This column is numeric but have some '
-                                                    'string data\n' % column_from_dataset.name)
+        analyzer_object.add_warning_info_for_column(column_from_dataset.name, 'This column is numeric but have some '
+                                                                              'string data\n')
         analyzer_object.lines_to_skip_indexes_list += count_string
         return 'NUMERIC'
 
@@ -120,7 +126,6 @@ def analyse_source_data_find_input_output(filename_with_data):
 
     # Check format of input file and read file with pandas
     if filename_with_data.endswith('.csv'):
-        #dataframe_from_file = pd.read_csv(filename_with_data, sep='[\t;:,|_]', engine='python')
         dataframe_from_file = pd.read_csv(filename_with_data, sep='\t', engine='python')
 
     elif filename_with_data.endswith('.xls') or filename_with_data.endswith('.xlsx'):
@@ -130,14 +135,14 @@ def analyse_source_data_find_input_output(filename_with_data):
 
     # Check size of dataframe. If size == 0 return message with error
     if number_of_rows_in_dataset == 0 or dataframe_from_file is None:
-        analyzed_object_from_file.add_error_info_for_column('Dataset is empty or bad file format\n')
+        analyzed_object_from_file.add_error_info_for_column('Dataset', 'Dataset is empty or bad file format\n')
         return analyzed_object_from_file
 
     # Search empty column and delete from dataset. Write info to warnings
     empty_columns = dataframe_from_file.columns[dataframe_from_file.isna().all()].tolist()
     if empty_columns:
         for column in empty_columns:
-            analyzed_object_from_file.add_warning_info_for_column("%s: All data is missing in column\n" % column)
+            analyzed_object_from_file.add_warning_info_for_column(column, "All data is missing in column\n")
             columns_type[column] = 'EMPTY'
 
     dataframe_from_file = dataframe_from_file.drop(columns=empty_columns)
@@ -160,12 +165,12 @@ def analyse_source_data_find_input_output(filename_with_data):
         analyzed_object_from_file.column_names_output = check_missing_data_count(analyzed_object_from_file,
                                                                                  columns_with_missing_data_dict)
     else:
-        analyzed_object_from_file.add_error_info_for_column('DATASET: Columns to predict not found')
+        analyzed_object_from_file.add_error_info_for_column('DATASET', 'Columns to predict not found\n')
 
     # Write warning message for all columns if column have nan and column not to_predict
     if list_of_columns_with_missing_values:
-        analyzed_object_from_file.add_warning_info_for_column(', '.join(list_of_columns_with_missing_values) +
-                                                              ' : Have missing data in some rows\n')
+        for column in list_of_columns_with_missing_values:
+            analyzed_object_from_file.add_warning_info_for_column(column, 'Have missing data in some rows\n')
     # Remove all rows with nan if nan not in to_predict column
     dataframe_from_file = dataframe_from_file.dropna(subset=list_of_columns_with_missing_values).reset_index()
     dataframe_from_file = dataframe_from_file.drop(columns='index')
@@ -227,7 +232,7 @@ def analyse_source_data_find_input_output(filename_with_data):
 
 
 if __name__ == '__main__':
-    A = analyse_source_data_find_input_output('test-4.xlsx')
+    A = analyse_source_data_find_input_output('test-2.xls')
     print('-------------------INPUT COLUMNS----------------------')
     print(A.column_names_input)
     print('-------------------OUTPUT COLUMNS----------------------')
