@@ -74,7 +74,7 @@ def send(request):
     return render(request, 'send.html', {'form': form})
 
 
-@login_required
+#@login_required
 def view(request, batch_id=None):
     import os
     import json
