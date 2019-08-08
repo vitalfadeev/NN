@@ -76,16 +76,25 @@ def send(request):
 
 @login_required
 def view(request, batch_id=None):
-    from .models import Batch
-    from .helpers import get_csv_lines
-    from django.conf import settings
     import os
     import json
+    from django.http import Http404
+    from django.conf import settings
+    from .models import Batch
+    from .helpers import get_csv_lines
 
     FIRST_LINES = 5
     LAST_LINES = 5
 
     batch = Batch.objects.get(Batch_Id=batch_id)
+
+    if batch.Project_IsPublic:
+        pass
+    else:
+        if batch.User_ID == request.user:
+            pass
+        else:
+            raise Http404
 
     #
     if os.path.isfile(batch.Project_FileSourcePathName.path):
